@@ -43,7 +43,11 @@ class Dealer {
     }
 
     fun playTurn(board: Board, player: Player, otherPlayersStatus: List<Player.Status>) {
-        //TODO
+        val boardCards = board.getBoard().map { cardID -> Card(cardID) }
+        val handCards = board.getHand(player.id).map { cardID -> Card(cardID) }
+        val playedCard = player.playCard(boardCards, handCards, otherPlayersStatus, isHeartBroken)
+        board.setCardOnBoard(playedCard.id)
+        player.cards = board.getHand(player.id).map { cardID -> Card(cardID) }
     }
 
     fun handleTurn(players: List<Player>) {
