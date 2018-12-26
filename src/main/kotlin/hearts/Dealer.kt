@@ -12,6 +12,9 @@ class Dealer {
 
     var turnPlayerID: Int = 0
 
+    private var isHeartBroken = false
+
+    fun isHeartBroken() = isHeartBroken
 
     //game manage functions
 
