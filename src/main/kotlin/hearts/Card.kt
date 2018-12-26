@@ -23,6 +23,12 @@ data class Card(val id: Int, val suit: Int, val number: Int) {
         }
     }
 
+    val point: Int = when {
+        this.suit == HEARTS -> 1
+        this.suit == SPADES && this.number == 12 -> 13
+        else -> 0
+    }
+
     override fun toString(): String {
         val suitStr = when (this.suit) {
             0 -> "♥"
