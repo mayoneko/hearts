@@ -12,8 +12,8 @@ class Player(val id: Int, private val algorithm: Algorithm) {
 
     private var chosenCardList = mutableListOf<Card>()
 
-    fun playCard(board: List<Card>, hand: List<Card>, otherPlayersStatus: List<Player.Status>): Card {
-        val chosenCard = algorithm.choiceCard(board, hand, otherPlayersStatus)
+    fun playCard(board: List<Card>, hand: List<Card>, otherPlayersStatus: List<Player.Status>,isHeartBroken:Boolean): Card {
+        val chosenCard = algorithm.choiceCard(board, hand, otherPlayersStatus, isHeartBroken)
         chosenCardList.add(chosenCard)
         return chosenCard
     }
