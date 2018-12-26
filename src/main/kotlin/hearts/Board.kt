@@ -1,56 +1,60 @@
 package hearts
 
 class Board {
-    private var ownerMap = mutableMapOf<Int, Int>()
+    private var ownerMap = mutableMapOf<Int, Pair<Int, Int>>()
     //key: cardID
-    //value: ownerID
+    //value: ownerID , state
 
     companion object {
-        const val BOARD = -1
+        const val HAND = 0
+        const val BOARD = 1
+        const val TRASH = 2
     }
-
-    private fun toTrash(playerID: Int): Int = playerID + 10
 
     init {
         for (cardID in 0..51) {
-            ownerMap[cardID] = BOARD
+            ownerMap[cardID] = Pair(-1, -1)
         }
     }
 
-    private fun getCards(ownerID: Int): List<Int> {
+    private fun getCards(ownerID: Int, state: Int): List<Int> {
         return ownerMap.filter { item ->
-            item.value == ownerID
+            item.value.first == ownerID && item.value.second == state
         }.map { item ->
             item.key
         }
     }
 
     fun getHand(playerID: Int): List<Int> {
-        return getCards(playerID)
+        return getCards(playerID, HAND)
     }
 
     fun getTrash(playerID: Int): List<Int> {
-        return getCards(toTrash(playerID))
+        return getCards(playerID, TRASH)
     }
 
     fun getBoard(): List<Int> {
-        return getCards(BOARD)
+        return ownerMap.filter { item ->
+            item.value.second == BOARD
+        }.map { item ->
+            item.key
+        }
     }
 
-    private fun setCardOwner(cardID: Int, ownerID: Int) {
-        ownerMap[cardID] = ownerID
+    private fun setCardOwner(cardID: Int, ownerID: Int, state: Int) {
+        ownerMap[cardID] = Pair(ownerID, state)
     }
 
     fun setCardToHand(cardID: Int, playerID: Int) {
-        setCardOwner(cardID, playerID)
+        setCardOwner(cardID, playerID, HAND)
     }
 
     fun setCardToTrash(cardID: Int, playerID: Int) {
-        setCardOwner(cardID, toTrash(playerID))
+        setCardOwner(cardID, playerID, TRASH)
     }
 
-    fun setCardOnBoard(cardID: Int) {
-        setCardOwner(cardID, BOARD)
+    fun setCardOnBoard(cardID: Int, playerID: Int) {
+        setCardOwner(cardID, playerID, BOARD)
     }
 
 }
