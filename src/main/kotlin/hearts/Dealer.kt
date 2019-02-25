@@ -16,6 +16,10 @@ class Dealer {
 
     fun isHeartBroken() = isHeartBroken
 
+    private var leadSuit = Card.CLUBS
+
+    fun getLeadSuit() = leadSuit
+
     //game manage functions
 
     fun dealCardsToPlayers(board: Board, players: List<Player>) {
