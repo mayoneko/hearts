@@ -7,28 +7,35 @@ class Game(algorithms: List<Algorithm>) {
     private val players = createPlayers(algorithms)
 
     fun run(): Map<Int, Int> {
-        var result = mapOf<Int, Int>()
-        dealer.dealCardsToPlayers(board, players)
-        dealer.setStartPlayer(players)
-        dealer.handleExchange(board, players)
-        do {
-            val player = players[dealer.turnPlayerID]
-            val otherPlayersStatus = players.filter {
-                it.id != dealer.turnPlayerID
-            }.map { otherPlayer -> otherPlayer.Status() }
+        val result = createPlayerScores()
+
+        do{
+            dealer.dealCardsToPlayers(board, players)
+            dealer.setStartPlayer(players)
+            dealer.handleExchange(board, players)
+            do {
+                val player = players[dealer.turnPlayerID]
+                val otherPlayersStatus = players.filter {
+                    it.id != dealer.turnPlayerID
+                }.map { otherPlayer -> otherPlayer.Status() }
 
 //            println("Player${player.id}")
 //            println("Cards")
 //            println(player.cards.sortedBy { card -> card.id }.toString())
 
-            dealer.playTurn(board, player, otherPlayersStatus)
+                dealer.playTurn(board, player, otherPlayersStatus)
 
-            if (!dealer.isGameEnded(players)) {
-                dealer.handleTurn(board,players)
-            } else {
-                result = dealer.getPlayerScores()
-            }
-        } while (!dealer.isGameEnded(players))
+                if (!dealer.isGameEnded(players)) {
+                    dealer.handleTurn(board, players)
+                } else {
+                    dealer.getPlayerScores(board).forEach {
+                        val temp = result[it.key] ?: 0
+                        result[it.key] = temp + it.value
+                    }
+                }
+            } while (!dealer.isGameEnded(players))
+
+        }while(result.any { it.value>=100 })
 
         return result
     }
