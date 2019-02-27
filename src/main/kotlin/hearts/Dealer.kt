@@ -57,8 +57,20 @@ class Dealer {
         player.cards = board.getHand(player.id).map { cardID -> Card(cardID) }
     }
 
-    fun handleTurn(players: List<Player>) {
-        turnPlayerID = (turnPlayerID + 1) % playerNum
+    fun handleTurn(board: Board, players: List<Player>) {
+        val boardCardsMap = board.getBoard().map { Card(it.first) to it.second }
+        when {
+            boardCardsMap.size == playerNum -> {
+                val willGetCardPlayerID =
+                    boardCardsMap.filter { it.first.suit == leadSuit }.maxBy { it.first.strength }!!.second
+                boardCardsMap.forEach {
+                    board.setCardToTrash(it.first.id, willGetCardPlayerID)
+                }
+                turnPlayerID = willGetCardPlayerID
+            }
+            boardCardsMap.size == 1 -> leadSuit = boardCardsMap[0].first.suit
+            else -> turnPlayerID = (turnPlayerID + 1) % playerNum
+        }
     }
 
     fun isGameEnded(players: List<Player>): Boolean {
