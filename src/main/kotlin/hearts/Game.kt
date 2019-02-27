@@ -4,7 +4,11 @@ class Game(algorithms: List<Algorithm>) {
     private val playerNum = 4
     private val board = Board()
     private val dealer = Dealer(playerNum)
-    private val players = createPlayers(algorithms)
+    private val players = if(algorithms.size == playerNum){
+        createPlayers(algorithms)
+    }else{
+        throw IllegalArgumentException("Algorithms' size must be 4")
+    }
 
     fun run(): Map<Int, Int> {
         val result = createPlayerScores()
