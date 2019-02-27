@@ -9,7 +9,7 @@ class Game(algorithms: List<Algorithm>) {
     fun run(): Map<Int, Int> {
         val result = createPlayerScores()
 
-        do{
+        do {
             dealer.dealCardsToPlayers(board, players)
             dealer.setStartPlayer(players)
             dealer.handleExchange(board, players)
@@ -19,15 +19,14 @@ class Game(algorithms: List<Algorithm>) {
                     it.id != dealer.turnPlayerID
                 }.map { otherPlayer -> otherPlayer.Status() }
 
-//            println("Player${player.id}")
-//            println("Cards")
-//            println(player.cards.sortedBy { card -> card.id }.toString())
+                println("Player${player.id}")
+                println("Cards")
+                println(player.cards.sortedBy { card -> card.id }.toString())
 
                 dealer.playTurn(board, player, otherPlayersStatus)
+                dealer.handleTurn(board, players)
 
-                if (!dealer.isGameEnded(players)) {
-                    dealer.handleTurn(board, players)
-                } else {
+                if (dealer.isGameEnded(players)) {
                     dealer.getPlayerScores(board).forEach {
                         val temp = result[it.key] ?: 0
                         result[it.key] = temp + it.value
@@ -35,7 +34,7 @@ class Game(algorithms: List<Algorithm>) {
                 }
             } while (!dealer.isGameEnded(players))
 
-        }while(result.any { it.value>=100 })
+        } while (result.any { it.value >= 100 })
 
         return result
     }

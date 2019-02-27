@@ -60,7 +60,10 @@ class Dealer(private val playerNum:Int) {
                 leadSuit = null
                 turnPlayerID = willGetCardPlayerID
             }
-            boardCardsMap.size == 1 -> leadSuit = boardCardsMap[0].first.suit
+            boardCardsMap.size == 1 ->{
+                leadSuit = boardCardsMap[0].first.suit
+                turnPlayerID = (turnPlayerID + 1) % playerNum
+            }
             else -> turnPlayerID = (turnPlayerID + 1) % playerNum
         }
     }
