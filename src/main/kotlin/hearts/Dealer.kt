@@ -47,10 +47,13 @@ class Dealer {
     }
 
     fun playTurn(board: Board, player: Player, otherPlayersStatus: List<Player.Status>) {
-        val boardCards = board.getBoard().map { cardID -> Card(cardID) }
+        val boardCardsMap = board.getBoard().map { Card(it.first) to it.second }
         val handCards = board.getHand(player.id).map { cardID -> Card(cardID) }
-        val playedCard = player.playCard(boardCards, handCards, otherPlayersStatus, isHeartBroken)
-        board.setCardOnBoard(playedCard.id)
+        val playedCard = player.playCard(boardCardsMap, handCards, otherPlayersStatus, isHeartBroken)
+        board.setCardOnBoard(playedCard.id, player.id)
+        if (playedCard.suit == Card.HEARTS && !isHeartBroken) {
+            isHeartBroken = true
+        }
         player.cards = board.getHand(player.id).map { cardID -> Card(cardID) }
     }
 
