@@ -13,7 +13,7 @@ class Board {
 
     init {
         for (cardID in 0..51) {
-            ownerMap[cardID] = Pair(-1, -1)
+            ownerMap[cardID] = -1 to -1
         }
     }
 
@@ -33,16 +33,16 @@ class Board {
         return getCards(playerID, TRASH)
     }
 
-    fun getBoard(): List<Int> {
+    fun getBoard(): List<Pair<Int, Int>> {
         return ownerMap.filter { item ->
             item.value.second == BOARD
         }.map { item ->
-            item.key
+            item.key to item.value.first
         }
     }
 
     private fun setCardOwner(cardID: Int, ownerID: Int, state: Int) {
-        ownerMap[cardID] = Pair(ownerID, state)
+        ownerMap[cardID] = ownerID to state
     }
 
     fun setCardToHand(cardID: Int, playerID: Int) {
