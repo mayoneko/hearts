@@ -14,7 +14,7 @@ class Dealer {
 
     private var isHeartBroken = false
 
-    private var leadSuit = Card.CLUBS
+    private var leadSuit: Int? = null
 
     //game manage functions
 
@@ -62,6 +62,7 @@ class Dealer {
                 boardCardsMap.forEach {
                     board.setCardToTrash(it.first.id, willGetCardPlayerID)
                 }
+                leadSuit = null
                 turnPlayerID = willGetCardPlayerID
             }
             boardCardsMap.size == 1 -> leadSuit = boardCardsMap[0].first.suit

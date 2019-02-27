@@ -5,7 +5,7 @@ abstract class Algorithm {
         boardMap: List<Pair<Card, Int>>,
         hand: List<Card>,
         otherPlayersStatus: List<Player.Status>,
-        leadSuit: Int,
+        leadSuit: Int?,
         isHeartBroken: Boolean
     ): Card
 
@@ -16,7 +16,7 @@ abstract class Algorithm {
         }
 
         @JvmStatic
-        fun getPlayableHand(board: List<Card>, hand: List<Card>, leadSuit: Int, isHeartBroken: Boolean): List<Card> {
+        fun getPlayableHand(board: List<Card>, hand: List<Card>, leadSuit: Int?, isHeartBroken: Boolean): List<Card> {
             val playableCards = mutableListOf<Card>()
             //TODO
             return playableCards

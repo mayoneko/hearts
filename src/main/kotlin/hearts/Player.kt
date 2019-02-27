@@ -16,7 +16,7 @@ class Player(val id: Int, private val algorithm: Algorithm) {
         boardMap: List<Pair<Card, Int>>,
         hand: List<Card>,
         otherPlayersStatus: List<Player.Status>,
-        leadSuit: Int,
+        leadSuit: Int?,
         isHeartBroken: Boolean
     ): Card {
         val chosenCard = algorithm.choiceCard(boardMap, hand, otherPlayersStatus, leadSuit, isHeartBroken)
