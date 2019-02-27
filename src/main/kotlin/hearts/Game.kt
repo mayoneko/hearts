@@ -38,7 +38,7 @@ class Game(algorithms: List<Algorithm>) {
                 }
             } while (!dealer.isGameEnded(players))
 
-        } while (result.any { it.value >= 100 })
+        } while (!result.any { it.value >= 100 })
 
         return result
     }
