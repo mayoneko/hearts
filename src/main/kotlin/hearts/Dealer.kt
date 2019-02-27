@@ -75,7 +75,12 @@ class Dealer {
         }
     }
 
-    fun getPlayerScores(): Map<Int, Int> {
+    fun getPlayerScores(board: Board): Map<Int, Int> {
+        (0 until playerNum).forEach{ playerID ->
+            playerScores[playerID] = board.getTrash(playerID).sumBy { cardID ->
+                Card(cardID).point
+            }
+        }
 //        println("GameSet\n")
 //        for (score in 1..playerNum) {
 //            println("Player${playerScores[rankID]} : -${score}")
