@@ -24,9 +24,9 @@ class Game(algorithms: List<Algorithm>) {
             dealer.playTurn(board, player, otherPlayersStatus)
 
             if (!dealer.isGameEnded(players)) {
-                dealer.handleTurn(players)
+                dealer.handleTurn(board,players)
             } else {
-                result = dealer.getPlayerRanking()
+                result = dealer.getPlayerScores()
             }
         } while (!dealer.isGameEnded(players))
 

@@ -6,9 +6,9 @@ class Dealer {
 
     val playerNum = 4
 
-    // key: rankID
-    // val: playerID
-    private val playerRanking = mutableMapOf<Int, Int>()
+    // key: playerID
+    // val: score
+    private val playerScores = mutableMapOf<Int, Int>()
 
     var turnPlayerID: Int = 0
 
@@ -79,11 +79,11 @@ class Dealer {
         }
     }
 
-    fun getPlayerRanking(): Map<Int, Int> {
+    fun getPlayerScores(): Map<Int, Int> {
 //        println("GameSet\n")
-//        for (rankID in 1..playerNum) {
-//            println("${rankID}位 : Player${playerRanking[rankID]}")
+//        for (score in 1..playerNum) {
+//            println("Player${playerScores[rankID]} : -${score}")
 //        }
-        return playerRanking
+        return playerScores
     }
 }
