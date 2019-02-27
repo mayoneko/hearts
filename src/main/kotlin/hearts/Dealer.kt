@@ -80,10 +80,6 @@ class Dealer(private val playerNum:Int) {
                 Card(cardID).point
             }
         }
-//        println("GameSet\n")
-//        for (score in 1..playerNum) {
-//            println("Player${playerScores[rankID]} : -${score}")
-//        }
         return playerScores
     }
 }
