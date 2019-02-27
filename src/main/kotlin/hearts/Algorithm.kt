@@ -2,7 +2,7 @@ package hearts
 
 abstract class Algorithm {
     abstract fun choiceCard(
-        board: List<Card>,
+        boardMap: List<Pair<Card, Int>>,
         hand: List<Card>,
         otherPlayersStatus: List<Player.Status>,
         isHeartBroken: Boolean
