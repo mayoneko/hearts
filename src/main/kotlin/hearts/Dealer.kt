@@ -1,6 +1,6 @@
 package hearts
 
-class Dealer(private val playerNum:Int) {
+class Dealer(private val playerNum: Int) {
 
     // key: playerID
     // val: score
@@ -60,7 +60,7 @@ class Dealer(private val playerNum:Int) {
                 leadSuit = null
                 turnPlayerID = willGetCardPlayerID
             }
-            boardCardsMap.size == 1 ->{
+            boardCardsMap.size == 1 -> {
                 leadSuit = boardCardsMap[0].first.suit
                 turnPlayerID = (turnPlayerID + 1) % playerNum
             }
@@ -75,9 +75,21 @@ class Dealer(private val playerNum:Int) {
     }
 
     fun getPlayerScores(board: Board): Map<Int, Int> {
+        var shootTheMoon = false
         (0 until playerNum).forEach { playerID ->
-            playerScores[playerID] = board.getTrash(playerID).sumBy { cardID ->
+            val score = board.getTrash(playerID).sumBy { cardID ->
                 Card(cardID).point
+            }
+            if (score != 26){
+                playerScores[playerID] = score
+            }else{
+                playerScores[playerID] = -26
+                shootTheMoon = true
+            }
+        }
+        if(shootTheMoon){
+            playerScores.forEach{
+                playerScores[it.key] = playerScores[it.key]!! + 26
             }
         }
         return playerScores
