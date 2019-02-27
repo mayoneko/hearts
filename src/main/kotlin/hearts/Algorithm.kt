@@ -16,7 +16,7 @@ abstract class Algorithm {
         }
 
         @JvmStatic
-        fun getPlayableHand(board: List<Card>, hand: List<Card>, leadSuit: Int?, isHeartBroken: Boolean): List<Card> {
+        fun getPlayableHand(hand: List<Card>, leadSuit: Int?, isHeartBroken: Boolean): List<Card> {
             val playableCards = mutableListOf<Card>()
             if (leadSuit == null) {
                 if (isHeartBroken) {
