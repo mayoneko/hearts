@@ -14,11 +14,7 @@ class Dealer {
 
     private var isHeartBroken = false
 
-    fun isHeartBroken() = isHeartBroken
-
     private var leadSuit = Card.CLUBS
-
-    fun getLeadSuit() = leadSuit
 
     //game manage functions
 
