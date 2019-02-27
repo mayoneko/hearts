@@ -37,4 +37,10 @@ class Game(algorithms: List<Algorithm>) {
         return (0 until playerNum).map { Player(it, algorithms[it]) }
     }
 
+    private fun createPlayerScores(): MutableMap<Int, Int> {
+        val playerScores = mutableMapOf<Int, Int>()
+        (0 until playerNum).forEach { playerScores += (it to 0) }
+        return playerScores
+    }
+
 }
