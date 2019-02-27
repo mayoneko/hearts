@@ -3,7 +3,7 @@ package hearts
 class Game(algorithms: List<Algorithm>) {
     private val playerNum = 4
     private val board = Board()
-    private val dealer = Dealer()
+    private val dealer = Dealer(playerNum)
     private val players = createPlayers(algorithms)
 
     fun run(): Map<Int, Int> {

@@ -1,10 +1,6 @@
 package hearts
 
-import kotlin.random.Random
-
-class Dealer {
-
-    val playerNum = 4
+class Dealer(private val playerNum:Int) {
 
     // key: playerID
     // val: score
