@@ -15,8 +15,7 @@ class Dealer(private val playerNum:Int) {
     //game manage functions
 
     fun dealCardsToPlayers(board: Board, players: List<Player>) {
-        val randomInt = Random.nextInt(playerNum)
-        for ((cardID, playerID) in (0..51).shuffled().zip((0..51).map { (it + randomInt) % playerNum })) {
+        for ((cardID, playerID) in (0..51).shuffled().zip((0..51).map { it % playerNum })) {
             board.setCardToHand(cardID, playerID)
         }
         for (player in players) {
