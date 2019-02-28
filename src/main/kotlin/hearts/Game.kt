@@ -44,6 +44,8 @@ class Game(algorithms: List<Algorithm>) {
     }
 
     private fun createPlayers(algorithms: List<Algorithm>): List<Player> {
+        //TODO: 順番を適切に並び替える
+
         return (0 until playerNum).map { Player(it, algorithms[it]) }
     }
 

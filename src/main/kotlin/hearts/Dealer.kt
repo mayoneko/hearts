@@ -57,6 +57,7 @@ class Dealer(private val playerNum: Int) {
                 boardCardsMap.forEach {
                     board.setCardToTrash(it.first.id, willGetCardPlayerID)
                 }
+                players[willGetCardPlayerID].trashCardList = board.getTrash(willGetCardPlayerID).map { Card(it) }
                 leadSuit = null
                 turnPlayerID = willGetCardPlayerID
             }
@@ -80,15 +81,15 @@ class Dealer(private val playerNum: Int) {
             val score = board.getTrash(playerID).sumBy { cardID ->
                 Card(cardID).point
             }
-            if (score != 26){
+            if (score != 26) {
                 playerScores[playerID] = score
-            }else{
+            } else {
                 playerScores[playerID] = -26
                 shootTheMoon = true
             }
         }
-        if(shootTheMoon){
-            playerScores.forEach{
+        if (shootTheMoon) {
+            playerScores.forEach {
                 playerScores[it.key] = playerScores[it.key]!! + 26
             }
         }
