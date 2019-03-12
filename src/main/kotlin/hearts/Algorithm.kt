@@ -31,7 +31,7 @@ abstract class Algorithm {
                 }
             }else{
                 playableCards.addAll(hand.filter { card ->
-                    card.suit != leadSuit
+                    card.suit == leadSuit
                 })
                 if(playableCards.isEmpty()){
                     playableCards.addAll(hand)
