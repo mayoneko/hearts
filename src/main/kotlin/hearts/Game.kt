@@ -23,9 +23,9 @@ class Game(algorithms: List<Algorithm>) {
                     it.id != dealer.turnPlayerID
                 }.map { otherPlayer -> otherPlayer.Status() }
 
-                println("Player${player.id}")
-                println("Cards")
-                println(player.cards.sortedBy { card -> card.id }.toString())
+//                println("Player${player.id}")
+//                println("Cards")
+//                println(player.cards.sortedBy { card -> card.id }.toString())
 
                 dealer.playTurn(board, player, otherPlayersStatus)
                 dealer.handleTurn(board, players)
@@ -44,8 +44,6 @@ class Game(algorithms: List<Algorithm>) {
     }
 
     private fun createPlayers(algorithms: List<Algorithm>): List<Player> {
-        //TODO: 順番を適切に並び替える
-
         return (0 until playerNum).map { Player(it, algorithms[it]) }
     }
 
