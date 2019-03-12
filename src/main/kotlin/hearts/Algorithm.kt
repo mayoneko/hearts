@@ -4,6 +4,7 @@ abstract class Algorithm {
     abstract fun choiceCard(
         boardMap: List<Pair<Card, Int>>,
         hand: List<Card>,
+        myStatus:Player.Status,
         otherPlayersStatus: List<Player.Status>,
         leadSuit: Int?,
         isHeartBroken: Boolean

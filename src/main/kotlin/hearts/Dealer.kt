@@ -40,7 +40,8 @@ class Dealer(private val playerNum: Int) {
     fun playTurn(board: Board, player: Player, otherPlayersStatus: List<Player.Status>) {
         val boardCardsMap = board.getBoard().map { Card(it.first) to it.second }
         val handCards = board.getHand(player.id).map { cardID -> Card(cardID) }
-        val playedCard = player.playCard(boardCardsMap, handCards, otherPlayersStatus, leadSuit, isHeartBroken)
+        val playedCard =
+            player.playCard(boardCardsMap, handCards, player.Status(), otherPlayersStatus, leadSuit, isHeartBroken)
         board.setCardOnBoard(playedCard.id, player.id)
         if (playedCard.suit == Card.HEARTS && !isHeartBroken) {
             isHeartBroken = true
@@ -92,6 +93,7 @@ class Dealer(private val playerNum: Int) {
             playerScores.forEach {
                 playerScores[it.key] = playerScores[it.key]!! + 26
             }
+//            println("ShootTheMoon!")
         }
         return playerScores
     }

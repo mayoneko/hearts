@@ -18,11 +18,12 @@ class Player(val id: Int, private val algorithm: Algorithm) {
     fun playCard(
         boardMap: List<Pair<Card, Int>>,
         hand: List<Card>,
+        myStatus: Status,
         otherPlayersStatus: List<Player.Status>,
         leadSuit: Int?,
         isHeartBroken: Boolean
     ): Card {
-        val chosenCard = algorithm.choiceCard(boardMap, hand, otherPlayersStatus, leadSuit, isHeartBroken)
+        val chosenCard = algorithm.choiceCard(boardMap, hand, myStatus,otherPlayersStatus, leadSuit, isHeartBroken)
         chosenCardList.add(chosenCard)
         return chosenCard
     }
