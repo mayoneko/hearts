@@ -2,5 +2,5 @@ package hearts
 
 fun main(args: Array<String>) {
     val result = Match(TestAlgorithm(), RandomAlgorithm(), RandomAlgorithm(), RandomAlgorithm()).run()
-    println(result)
+    println("平均失点\n" + result.mapIndexed { index, value -> "$index:$value" }.toString())
 }
