@@ -30,17 +30,19 @@ class Match(vararg _algorithms: Algorithm) {
     fun run(): List<Int> {
         var count = 0
         val result = MutableList(algorithms.size) { 0 }
-        createPermutation().forEach {
+        createPermutation().forEach { listOfInt ->
             count += 100
-            println(it)
+            println(listOfInt)
             for (i in 1..100) {
-                Game(it.map { algorithms[it] }).run().forEach{
-                    result[it.key] += it.value
+                val data = Game(listOfInt.map { algorithms[it] }).run()
+                listOfInt.forEachIndexed { index, value ->
+                    result[value] += data[index] ?: throw IllegalArgumentException("Unexpected result of game")
                 }
+//                println(listOfInt.mapIndexed{index,value -> "$value:${data[index]}"})
             }
         }
-        return result.map{
-            it/count
+        return result.map {
+            it / count
         }
     }
 
