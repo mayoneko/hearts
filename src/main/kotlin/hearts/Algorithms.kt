@@ -4,7 +4,7 @@ import hearts.Algorithm.Utils.getPlayableHand
 
 class RandomAlgorithm : Algorithm() {
     override fun choiceExchange(hand: List<Card>): List<Card> {
-        return (1..3).map { hand[it] }
+        return hand.take(3)
     }
 
     override fun choiceCard(

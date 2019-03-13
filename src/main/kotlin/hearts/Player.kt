@@ -39,12 +39,12 @@ class Player(val id: Int, private val algorithm: Algorithm) {
         val chosenCards = algorithm.choiceExchange(hand)
         if (chosenCards.size != 3) {
             println("Illegal Size Of Exchange Cards")
-            return (1..3).map { hand[it] }
+            return hand.take(3)
         }
         chosenCards.forEach {
             if (!hand.contains(it)) {
                 println("Illegal Choice in Exchange")
-                return (1..3).map { hand[it] }
+                return hand.take(3)
             }
         }
         return chosenCards
