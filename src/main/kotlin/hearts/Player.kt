@@ -23,14 +23,30 @@ class Player(val id: Int, private val algorithm: Algorithm) {
         leadSuit: Int?,
         isHeartBroken: Boolean
     ): Card {
-        val chosenCard = algorithm.choiceCard(board, hand, myStatus,otherPlayersStatus, leadSuit, isHeartBroken)
-        //TODO: 例外処理
-        playedCardList.add(chosenCard)
-        return chosenCard
+        val chosenCard = algorithm.choiceCard(board, hand, myStatus, otherPlayersStatus, leadSuit, isHeartBroken)
+        val playable = Algorithm.Utils.getPlayableHand(hand, leadSuit, isHeartBroken)
+        if (chosenCard in playable) {
+            playedCardList.add(chosenCard)
+            return chosenCard
+        }
+        println("Illegal Choice in Play")
+        val randomCard = playable.random()
+        playedCardList.add(randomCard)
+        return randomCard
     }
 
     fun exchangeCards(hand: List<Card>): List<Card> {
-        //TODO: 例外処理
-        return algorithm.choiceExchange(hand)
+        val chosenCards = algorithm.choiceExchange(hand)
+        if (chosenCards.size != 3) {
+            println("Illegal Size Of Exchange Cards")
+            return (1..3).map { hand[it] }
+        }
+        chosenCards.forEach {
+            if (!hand.contains(it)) {
+                println("Illegal Choice in Exchange")
+                return (1..3).map { hand[it] }
+            }
+        }
+        return chosenCards
     }
 }
