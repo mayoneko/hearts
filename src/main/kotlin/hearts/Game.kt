@@ -4,9 +4,9 @@ class Game(algorithms: List<Algorithm>) {
     private val playerNum = 4
     private val board = Board()
     private val dealer = Dealer(playerNum)
-    private val players = if(algorithms.size == playerNum){
+    private val players = if (algorithms.size == playerNum) {
         createPlayers(algorithms)
-    }else{
+    } else {
         throw IllegalArgumentException("Algorithms' size must be 4")
     }
 
@@ -16,6 +16,9 @@ class Game(algorithms: List<Algorithm>) {
         do {
             dealer.dealCardsToPlayers(board, players)
             dealer.setStartPlayer(players)
+            players.forEach {
+                dealer.playExchange(board, it)
+            }
             dealer.handleExchange(board, players)
             do {
                 val player = players[dealer.turnPlayerID]

@@ -24,7 +24,13 @@ class Player(val id: Int, private val algorithm: Algorithm) {
         isHeartBroken: Boolean
     ): Card {
         val chosenCard = algorithm.choiceCard(board, hand, myStatus,otherPlayersStatus, leadSuit, isHeartBroken)
+        //TODO: 例外処理
         playedCardList.add(chosenCard)
         return chosenCard
+    }
+
+    fun exchangeCards(hand: List<Card>): List<Card> {
+        //TODO: 例外処理
+        return algorithm.choiceExchange(hand)
     }
 }

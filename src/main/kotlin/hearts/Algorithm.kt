@@ -10,6 +10,8 @@ abstract class Algorithm {
         isHeartBroken: Boolean
     ): Card
 
+    abstract fun choiceExchange(hand: List<Card>): List<Card>
+
     object Utils {
         @JvmStatic
         fun getPlayableHand(hand: List<Card>, leadSuit: Int?, isHeartBroken: Boolean): List<Card> {

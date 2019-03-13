@@ -3,6 +3,10 @@ package hearts
 import hearts.Algorithm.Utils.getPlayableHand
 
 class RandomAlgorithm : Algorithm() {
+    override fun choiceExchange(hand: List<Card>): List<Card> {
+        return (1..3).map { hand[it] }
+    }
+
     override fun choiceCard(
         board: List<Card>,
         hand: List<Card>,
@@ -16,6 +20,19 @@ class RandomAlgorithm : Algorithm() {
 }
 
 class TestAlgorithm : Algorithm() {
+    override fun choiceExchange(hand: List<Card>): List<Card> {
+        val suitList = mutableListOf(0, 0, 0, 0)
+        hand.forEach {
+            suitList[it.suit]++
+        }
+        val sortedSuit = suitList.withIndex().sortedBy { it.value }.map { it.index }
+//        println("suitList"+suitList)
+//        println("sortedSuit"+sortedSuit)
+        val returnList =  hand.sortedBy { - it.strength + 13 * sortedSuit.indexOf(it.suit) }.take(3)
+//        println(returnList.map { it.suit to it.strength })
+        return returnList
+    }
+
     override fun choiceCard(
         board: List<Card>,
         hand: List<Card>,

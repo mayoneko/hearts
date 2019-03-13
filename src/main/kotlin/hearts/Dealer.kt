@@ -32,9 +32,18 @@ class Dealer(private val playerNum: Int) {
         }
     }
 
-    fun handleExchange(board: Board, players: List<Player>) {
-        //TODO
+    fun playExchange(board: Board, player: Player) {
+        val handCards = board.getHand(player.id).map { cardID -> Card(cardID) }
+        val exchangeCards = player.exchangeCards(handCards)
+        exchangeCards.forEach {
+            board.setCardOnBoard(it.id, player.id)
+        }
+    }
 
+    fun handleExchange(board: Board, players: List<Player>) {
+        board.getBoard().forEach {
+            board.setCardToHand(it.first, (it.second + 1) % playerNum)
+        }
     }
 
     fun playTurn(board: Board, player: Player, otherPlayersStatus: List<Player.Status>) {
