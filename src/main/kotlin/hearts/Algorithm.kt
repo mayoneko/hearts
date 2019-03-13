@@ -4,7 +4,7 @@ abstract class Algorithm {
     abstract fun choiceCard(
         board: List<Card>,
         hand: List<Card>,
-        myStatus:Player.Status,
+        myStatus: Player.Status,
         otherPlayersStatus: List<Player.Status>,
         leadSuit: Int?,
         isHeartBroken: Boolean
@@ -23,15 +23,15 @@ abstract class Algorithm {
                     playableCards.addAll(hand.filter { card ->
                         card.suit != Card.HEARTS
                     })
-                    if(playableCards.isEmpty()){
+                    if (playableCards.isEmpty()) {
                         playableCards.addAll(hand)
                     }
                 }
-            }else{
+            } else {
                 playableCards.addAll(hand.filter { card ->
                     card.suit == leadSuit
                 })
-                if(playableCards.isEmpty()){
+                if (playableCards.isEmpty()) {
                     playableCards.addAll(hand)
                 }
             }

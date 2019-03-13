@@ -28,7 +28,7 @@ class TestAlgorithm : Algorithm() {
         val sortedSuit = suitList.withIndex().sortedBy { it.value }.map { it.index }
 //        println("suitList"+suitList)
 //        println("sortedSuit"+sortedSuit)
-        val returnList =  hand.sortedBy { - it.strength + 13 * sortedSuit.indexOf(it.suit) }.take(3)
+        val returnList = hand.sortedBy { -it.strength + 13 * sortedSuit.indexOf(it.suit) }.take(3)
 //        println(returnList.map { it.suit to it.strength })
         return returnList
     }
