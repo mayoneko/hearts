@@ -5,26 +5,26 @@ class Player(val id: Int, private val algorithm: Algorithm) {
     inner class Status {
         val id = this@Player.id
         val handNum = this@Player.cards.size
-        val chosenCard: List<Card> = this@Player.chosenCardList
-        val trashCard: List<Card> = this@Player.trashCardList
+        val playedCards: List<Card> = this@Player.playedCardList
+        val receivedCards: List<Card> = this@Player.receivedCardList
     }
 
     var cards = listOf<Card>()
 
-    private var chosenCardList = mutableListOf<Card>()
+    private var playedCardList = mutableListOf<Card>()
 
-    var trashCardList = listOf<Card>()
+    var receivedCardList = listOf<Card>()
 
     fun playCard(
-        boardMap: List<Pair<Card, Int>>,
+        board: List<Card>,
         hand: List<Card>,
         myStatus: Status,
         otherPlayersStatus: List<Player.Status>,
         leadSuit: Int?,
         isHeartBroken: Boolean
     ): Card {
-        val chosenCard = algorithm.choiceCard(boardMap, hand, myStatus,otherPlayersStatus, leadSuit, isHeartBroken)
-        chosenCardList.add(chosenCard)
+        val chosenCard = algorithm.choiceCard(board, hand, myStatus,otherPlayersStatus, leadSuit, isHeartBroken)
+        playedCardList.add(chosenCard)
         return chosenCard
     }
 }

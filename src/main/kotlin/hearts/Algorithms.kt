@@ -4,7 +4,7 @@ import hearts.Algorithm.Utils.getPlayableHand
 
 class RandomAlgorithm : Algorithm() {
     override fun choiceCard(
-        boardMap: List<Pair<Card, Int>>,
+        board: List<Card>,
         hand: List<Card>,
         myStatus: Player.Status,
         otherPlayersStatus: List<Player.Status>,
@@ -17,7 +17,7 @@ class RandomAlgorithm : Algorithm() {
 
 class TestAlgorithm : Algorithm() {
     override fun choiceCard(
-        boardMap: List<Pair<Card, Int>>,
+        board: List<Card>,
         hand: List<Card>,
         myStatus: Player.Status,
         otherPlayersStatus: List<Player.Status>,
@@ -25,9 +25,9 @@ class TestAlgorithm : Algorithm() {
         isHeartBroken: Boolean
     ): Card {
         val playable = getPlayableHand(hand, leadSuit, isHeartBroken)
-        if ((hand.size < 6) && (otherPlayersStatus.filter { !it.trashCard.none { it.point > 0 } }.size == 1) && (myStatus.trashCard.none { it.point > 0 })) {
+        if ((hand.size < 6) && (otherPlayersStatus.filter { !it.receivedCards.none { it.point > 0 } }.size == 1) && (myStatus.receivedCards.none { it.point > 0 })) {
 //            println("blockMoon")
-            if (boardMap.any { it.first.point > 0 }) {
+            if (board.any { it.point > 0 }) {
                 return playable.filter {
                     it.suit == leadSuit
                 }.maxBy {

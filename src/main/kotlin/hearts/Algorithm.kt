@@ -2,7 +2,7 @@ package hearts
 
 abstract class Algorithm {
     abstract fun choiceCard(
-        boardMap: List<Pair<Card, Int>>,
+        board: List<Card>,
         hand: List<Card>,
         myStatus:Player.Status,
         otherPlayersStatus: List<Player.Status>,
@@ -11,11 +11,6 @@ abstract class Algorithm {
     ): Card
 
     object Utils {
-        @JvmStatic
-        fun play(card: Card): Card {
-            return card
-        }
-
         @JvmStatic
         fun getPlayableHand(hand: List<Card>, leadSuit: Int?, isHeartBroken: Boolean): List<Card> {
             val playableCards = mutableListOf<Card>()
