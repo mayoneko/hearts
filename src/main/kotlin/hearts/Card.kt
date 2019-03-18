@@ -1,6 +1,6 @@
 package hearts
 
-data class Card(val id: Int, val suit: Int, val number: Int) {
+data class Card(@JvmField val id: Int, @JvmField val suit: Int, @JvmField val number: Int) {
     companion object {
         const val HEARTS = 0
         const val DIAMONDS = 1
@@ -23,13 +23,13 @@ data class Card(val id: Int, val suit: Int, val number: Int) {
         }
     }
 
-    val point: Int = when {
+    @JvmField val point: Int = when {
         this.suit == HEARTS -> 1
         this.suit == SPADES && this.number == 12 -> 13
         else -> 0
     }
 
-    val strength: Int = if (number==1) 14 else number
+    @JvmField val strength: Int = if (number == 1) 14 else number
 
     override fun toString(): String {
         val suitStr = when (this.suit) {

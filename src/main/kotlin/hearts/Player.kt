@@ -3,10 +3,10 @@ package hearts
 class Player(val id: Int, private val algorithm: Algorithm) {
 
     inner class Status {
-        val id = this@Player.id
-        val handNum = this@Player.cards.size
-        val playedCards: List<Card> = this@Player.playedCardList
-        val receivedCards: List<Card> = this@Player.receivedCardList
+        @JvmField val id = this@Player.id
+        @JvmField val handNum = this@Player.cards.size
+        @JvmField val playedCards: List<Card> = this@Player.playedCardList
+        @JvmField val receivedCards: List<Card> = this@Player.receivedCardList
     }
 
     var cards = listOf<Card>()
