@@ -5,7 +5,7 @@ class GreatAlgorithm extends Algorithm {
     return playableHand.get(0);
   }
 
-  List<Card> choiceExchange(List hand) {
+  List<Card> choiceExchange(List<Card> hand) {
     return hand.subList(0, 3);
   }
 }
