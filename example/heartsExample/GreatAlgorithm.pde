@@ -1,6 +1,6 @@
 
 class GreatAlgorithm extends Algorithm {
-  Card choiceCard(List board, List hand, Player.Status myStatus, List otherPlayerStatus, Integer leadSuit, boolean isHeartBroken) {
+  Card choiceCard(List<Card> board, List<Card> hand, Player.Status myStatus, List<Player.Status> otherPlayerStatus, Integer leadSuit, boolean isHeartBroken) {
     List<Card> playableHand = Utils.getPlayableHand(hand, leadSuit, isHeartBroken);
     return playableHand.get(0);
   }
