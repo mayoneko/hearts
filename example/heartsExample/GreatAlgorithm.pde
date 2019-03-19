@@ -6,6 +6,11 @@ class GreatAlgorithm extends Algorithm {
   }
 
   List<Card> choiceExchange(List<Card> hand) {
-    return hand.subList(0, 3);
+    Card[] _hand = hand.toArray(new Card [hand.size()]);
+    Card[] returnHand = new Card[3];
+    for(int i=0;i<3;i++){
+      returnHand[i] = _hand[i];
+    }
+    return Arrays.asList(returnHand);
   }
 }

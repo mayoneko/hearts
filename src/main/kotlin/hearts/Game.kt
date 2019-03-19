@@ -1,10 +1,10 @@
 package hearts
 
-class Game(algorithms: List<Algorithm>) {
-    private val playerNum = 4
-    private val board = Board()
-    private val dealer = Dealer(playerNum)
-    private val players = if (algorithms.size == playerNum) {
+class Game(private val algorithms: List<Algorithm>) {
+    private var playerNum = 4
+    private var board = Board()
+    private var dealer = Dealer(playerNum)
+    private var players = if (algorithms.size == playerNum) {
         createPlayers(algorithms)
     } else {
         throw IllegalArgumentException("Algorithms' size must be 4")
@@ -14,6 +14,13 @@ class Game(algorithms: List<Algorithm>) {
         val result = createPlayerScores()
 
         do {
+            board = Board()
+            dealer = Dealer(playerNum)
+            players = if (algorithms.size == playerNum) {
+                createPlayers(algorithms)
+            } else {
+                throw IllegalArgumentException("Algorithms' size must be 4")
+            }
             dealer.dealCardsToPlayers(board, players)
             dealer.setStartPlayer(players)
             players.forEach {
@@ -33,13 +40,12 @@ class Game(algorithms: List<Algorithm>) {
                 dealer.playTurn(board, player, otherPlayersStatus)
                 dealer.handleTurn(board, players)
 
-                if (dealer.isGameEnded(players)) {
-                    dealer.getPlayerScores(board).forEach {
-                        val temp = result[it.key] ?: 0
-                        result[it.key] = temp + it.value
-                    }
-                }
             } while (!dealer.isGameEnded(players))
+
+            dealer.getPlayerScores(board).forEach {
+                val temp = result[it.key] ?: 0
+                result[it.key] = temp + it.value
+            }
 
         } while (!result.any { it.value >= 100 })
 
